@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Seesaw Simulation</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <h2>Seesaw Simulation</h2>
+    <div id="status">Click a zone on the arm to begin</div>
+    <div class="scene">
+        <div id="pausedLabel" >Paused </div>
+        <div class="ground-line"></div>
+        <div class="pivot"></div>
+        <div class="arm" id="arm">
+            <div class="center-mark"></div>
+        </div>
+    </div>
+    <div class="weight-panel" id="weightPanel" style="display:none;">
+        Selected zone: <b id="selZoneLabel">-</b>
+        &nbsp;|&nbsp; Pick an weight:
+        <span id="weightButtons"></span>
+        &nbsp; <button onclick="cancelSelection()"><b>Cancel</b></button>
+    </div>
+    <hr>
+    <table>
+    <tr>
+        <th>Left Weight</th>
+        <th>Left Torque</th>
+        <th>Right Torque</th>
+        <th>Right Weight</th>
+        <th>Difference</th>
+        <th>Angle</th>
+    </tr>
+    <tr>
+        <td id="infoLW">0 kg</td>
+        <td id="infoLT">0</td>
+        <td id="infoRT">0</td>
+        <td id="infoRW">0 kg</td>
+        <td id="infoDiff">0</td>
+        <td id="infoAngle">0.0&deg;</td>
+    </tr>
+</table>
+    <table id="zoneTable">
+        <tr><th colspan="21">Zone Map</th></tr>
+        <tr id="zoneHeaderRow"></tr>
+        <tr id="zoneDataRow"></tr>
+
+    </table>
+    <br>
+    <button onclick="resetAll()"><b>Reset</b></button>
+    <button onclick="undoLast()"><b>Undo Last</b></button>
+    <button id="pauseBtn" onclick="togglePause()"><b>Pause</b></button>
+    <script src="script.js"></script>
+        
+</body>
+</html>
