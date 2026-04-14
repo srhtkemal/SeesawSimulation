@@ -88,9 +88,10 @@
     for (let k = 0; k < allZ.length; k++) {
       allZ[k].classList.remove('selected');
     }
-    statusEl.textContent= 'Cancelled. Click a zone to begin';
+    statusEl.textContent = 'Cancelled. Click a zone to begin';
   };
   function placeWeight(w) {
+    if (selectedZone === null) return;
     const zone = selectedZone;
     console.log('weight=> ', w);
     console.log('zone=> ', zone);
@@ -147,10 +148,10 @@
     }
 
     const diff = rightTorque - leftTorque;
-    document.getElementById('infoLW').textContent= leftWeight + ' kg';
-    document.getElementById('infoLT').textContent=leftTorque + ' kg';
-    document.getElementById('infoRW').textContent=rightWeight + ' kg';
-    document.getElementById('infoRT').textContent=rightTorque + ' kg';
+    document.getElementById('infoLW').textContent = leftWeight + ' kg';
+    document.getElementById('infoLT').textContent = leftTorque + ' kg';
+    document.getElementById('infoRW').textContent = rightWeight + ' kg';
+    document.getElementById('infoRT').textContent = rightTorque + ' kg';
     document.getElementById('infoDiff').textContent =
       (diff > 0 ? '+' : '') + diff;
     document.getElementById('infoAngle').textContent =
@@ -245,26 +246,25 @@
       addMarker(objects[k].zone, objects[k].weight, k);
     }
     recalculate();
-    statusEl.textContent="Last object is removed. Remaining: "+objects.length;
+    statusEl.textContent =
+      'Last object is removed. Remaining: ' + objects.length;
   };
-window.togglePause= function(){
-    paused=!paused;
-    const btn=document.getElementById("pauseBtn");
-    const label=document.getElementById("pausedLabel");
+  window.togglePause = function () {
+    paused = !paused;
+    const btn = document.getElementById('pauseBtn');
+    const label = document.getElementById('pausedLabel');
 
-    if(paused){
-        if(animId){
-            cancelAnimationFrame(animId);
-            animId=null;
-        }
-        btn.innerHTML="<b> RESUME </b>"
-        label.style.display="block";
+    if (paused) {
+      if (animId) {
+        cancelAnimationFrame(animId);
+        animId = null;
+      }
+      btn.innerHTML = '<b> RESUME </b>';
+      label.style.display = 'block';
+    } else {
+      btn.innerHTML = '<b> PAUSE </b>';
+      label.style.display = 'none';
+      startAnimation();
     }
-    else {
-        btn.innerHTML="<b> PAUSE </b>"
-        label.style.display="none";
-        startAnimation();
-    }
-}
-
+  };
 })();
