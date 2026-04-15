@@ -220,10 +220,10 @@ function playCreak() {
       zoneWeights[o.zone] += o.weight;
     }
 
-    // const diff = rightTorque - leftTorque;
-    // if (diff > 0) targetAngle = 30;
-    // else if (diff < 0) targetAngle = -30;
-    // else targetAngle = 0;
+    //const diff = rightTorque - leftTorque;
+    //if (diff > 0) targetAngle = 30;
+    //else if (diff < 0) targetAngle = -30;
+    //else targetAngle = 0;
     const diff = rightTorque - leftTorque;
     targetAngle = Math.max(-30, Math.min(30, diff / 10));
 
