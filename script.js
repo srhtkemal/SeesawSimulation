@@ -18,6 +18,27 @@
   let animId = null;
   let paused = false;
 
+  let creakCounter = 0; 
+
+  const clickSound = new Audio("sound-effects/click.wav");
+  const dropSound = new Audio("sound-effects/drop.wav");
+  const creakSound = new Audio("sound-effects/creak.wav");
+
+function playClick() {
+  clickSound.currentTime = 0;
+  clickSound.play();
+}
+
+function playDrop() {
+  dropSound.currentTime = 0;
+  dropSound.play();
+}
+
+function playCreak() {
+  creakSound.currentTime = 0;
+  creakSound.play();
+}
+
   for (let i = -ZONES; i <= ZONES; i++) {
     if (i === 0) continue; // because it is the 0 point, it has no torque
     const div = document.createElement('div');
@@ -121,7 +142,7 @@
     console.log('zone=> ', zone);
     objects.push({ zone: zone, weight: w });
     addMarker(zone, w, objects.length - 1);
-
+    playDrop();
     window.cancelSelection();
     recalculate();
     saveState();
@@ -239,6 +260,12 @@
     } else currentAngle = Math.max(currentAngle - STEP, targetAngle);
     arm.style.transform = 'rotate(' + currentAngle + 'deg)';
     updateDisplay();
+
+    creakCounter++;
+    if (creakCounter >= 15) {
+      creakCounter = 0;
+      playCreak();
+    }
     setTimeout(function () {
       animId = requestAnimationFrame(animateStep);
     }, 20);
@@ -281,6 +308,7 @@
       'Last object is removed. Remaining: ' + objects.length;
   };
   window.togglePause = function () {
+    playClick();
     paused = !paused;
     const btn = document.getElementById('pauseBtn');
     const label = document.getElementById('pausedLabel');
