@@ -137,6 +137,8 @@
     for (let k = 0; k < objects.length; k++) {
       const o = objects[k];
       const dist = Math.abs(o.zone);
+      //const cosA = Math.cos(currentAngle * Math.PI / 180);
+      //const t = o.weight * dist * cosA;
       const t = o.weight * dist; // The formula we are going to use is (weight * distance)
       if (o.zone < 0) {
         leftTorque += t;
@@ -172,10 +174,12 @@
       zoneWeights[o.zone] += o.weight;
     }
 
+    // const diff = rightTorque - leftTorque;
+    // if (diff > 0) targetAngle = 30;
+    // else if (diff < 0) targetAngle = -30;
+    // else targetAngle = 0;
     const diff = rightTorque - leftTorque;
-    if (diff > 0) targetAngle = 20;
-    else if (diff < 0) targetAngle = -20;
-    else targetAngle = 0;
+    targetAngle = Math.max(-30, Math.min(30, diff / 10));
 
     for (let z = -ZONES; z <= ZONES; z++) {
       if (z === 0) continue;
