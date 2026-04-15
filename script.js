@@ -65,6 +65,30 @@
     dataRow.appendChild(td);
   }
 
+    function saveState() {
+    localStorage.setItem("seesawObjects", JSON.stringify(objects));
+  }
+ 
+  function loadState() {
+    const saved = localStorage.getItem("seesawObjects");
+    if (!saved) return;
+    try {
+      const parsed = JSON.parse(saved);
+      if (!Array.isArray(parsed)) return;
+      for (let k = 0; k < parsed.length; k++) {
+        objects.push(parsed[k]);
+        addMarker(parsed[k].zone, parsed[k].weight, k);
+      }
+      recalculate();
+      statusEl.textContent = "State restored. " + objects.length + " objects loaded.";
+    } catch (e) {
+      // ignores the invalid data
+    }
+  }
+ 
+
+  loadState();
+
   function selectZone(z) {
     selectedZone = z;
     const allZ = arm.querySelectorAll('.zone');
@@ -100,6 +124,7 @@
 
     window.cancelSelection();
     recalculate();
+    saveState();
     statusEl.textContent =
       w + ' kg placed at zone ' + zone + ' Total objects=> ' + objects.length;
     selectedZone = null;
@@ -236,6 +261,7 @@
     arm.style.transform = 'rotate(0deg)';
     window.cancelSelection();
     recalculate();
+    saveState();
     statusEl.textContent = 'Reset. Click a zone to begin.';
   };
 
@@ -250,6 +276,7 @@
       addMarker(objects[k].zone, objects[k].weight, k);
     }
     recalculate();
+    saveState();
     statusEl.textContent =
       'Last object is removed. Remaining: ' + objects.length;
   };
