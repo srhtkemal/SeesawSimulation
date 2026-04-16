@@ -15,7 +15,12 @@ The plank has a fixed length, and the pivot sits exactly in the middle. When you
 
 ![Color by weight](image.png)
 
-The seesaw tilts linearly based on the torque difference, capped at 30 degrees. So twice the torque difference means twice the tilt angle. The current state is saved in localStorage, which is why reloading the page doesn't wipe your setup.
+The seesaw tilts linearly based on the torque difference, capped at 30 degrees. So twice the torque difference means twice the tilt angle. 
+![first](image-16.png)
+![second](image-17.png)
+![third](image-18.png)
+![fourth](image-19.png)
+The current state is saved in localStorage, which is why reloading the page doesn't wipe your setup.
 
 ## Sound effects
 
