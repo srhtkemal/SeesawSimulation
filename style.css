@@ -1,44 +1,61 @@
+
+* {
+  box-sizing: border-box;
+}
+
 body {
-  font-family: "Helvetica", monospace;
-  background: #fff;
-  margin: 20px;
-  font-size: 13px;
+  font-family: -apple-system, BlinkMacSystemFont, "SF Pro Display",
+    "SF Pro Text", "Helvetica Neue", Helvetica, Arial, sans-serif;
+  background: #f5f5f7;
+  margin: 0;
+  padding: 56px 24px 96px;
+  font-size: 14px;
+  color: #1d1d1f;
+  min-height: 100vh;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
 h2 {
-  font-size: 16px;
-  margin-bottom: 4px;
+  font-size: 44px;
+  font-weight: 700;
+  letter-spacing: -0.025em;
+  margin: 0 0 10px;
+  text-align: center;
+  color: #1d1d1f;
+}
+
+#status {
+  font-size: 15px;
+  color: #6e6e73;
+  margin: 0 0 24px;
+  text-align: center;
+  font-weight: 400;
+  letter-spacing: -0.01em;
 }
 
 hr {
-  margin: 6px 0;
-}
-
-table {
-  border-collapse: collapse;
-  margin-bottom: 6px;
-}
-
-td, th {
-  border: 1px solid #000;
-  padding: 3px 6px;
-  text-align: center;
-  font-size: 11px;
-  font-family: "Helvetica", monospace;
-}
-
-th {
-  background: #ddd;
+  border: none;
+  height: 1px;
+  background: rgba(0, 0, 0, 0.08);
+  width: 640px;
+  margin: 24px 0 16px;
 }
 
 .scene {
   position: relative;
   width: 640px;
   height: 420px;
-  border: 1px solid #000;
-  margin: 10px 0;
+  border-radius: 20px;
+  margin: 0 0 20px;
   overflow: hidden;
-  background: #fafafa;
+  background: linear-gradient(180deg, #ffffff 0%, #f5f5f7 100%);
+  box-shadow:
+    0 1px 2px rgba(0, 0, 0, 0.04),
+    0 10px 32px rgba(0, 0, 0, 0.06);
 }
 
 .pivot {
@@ -50,7 +67,8 @@ th {
   height: 0;
   border-left: 18px solid transparent;
   border-right: 18px solid transparent;
-  border-bottom: 155px solid #000;
+  border-bottom: 155px solid #1d1d1f;
+  filter: drop-shadow(0 4px 8px rgba(0, 0, 0, 0.15));
 }
 
 .ground-line {
@@ -58,7 +76,15 @@ th {
   bottom: 13px;
   left: 0;
   right: 0;
-  border-top: 2px solid #000;
+  border: none;
+  height: 1px;
+  background: linear-gradient(
+    90deg,
+    transparent 0%,
+    rgba(0, 0, 0, 0.18) 15%,
+    rgba(0, 0, 0, 0.18) 85%,
+    transparent 100%
+  );
 }
 
 .arm {
@@ -68,9 +94,13 @@ th {
   margin-left: -300px;
   width: 600px;
   height: 10px;
-  background: #996633;
-  border: 1px solid #000;
+  background: linear-gradient(180deg, #a0684a 0%, #7a4a31 100%);
+  border: none;
+  border-radius: 4px;
   transform-origin: 300px 10px;
+  box-shadow:
+    0 2px 6px rgba(0, 0, 0, 0.18),
+    inset 0 1px 0 rgba(255, 255, 255, 0.25);
 }
 
 .zone {
@@ -78,38 +108,45 @@ th {
   top: -50px;
   height: 60px;
   cursor: pointer;
-  border-left: 1px dashed #aaa;
+  border-left: 1px dashed rgba(0, 0, 0, 0.12);
   display: flex;
   align-items: flex-end;
   justify-content: center;
+  transition: background-color 0.15s ease;
 }
 
 .zone:hover {
-  background: rgba(0, 0, 200, 0.08);
+  background: rgba(0, 113, 227, 0.1);
 }
 
 .zone.selected {
-  background: rgba(200, 0, 0, 0.12);
+  background: rgba(255, 59, 48, 0.14);
 }
 
 .zone-label {
   margin-bottom: 1px;
   pointer-events: none;
   font-size: 9px;
-  color: #fff;
-  font-weight: bold;
+  color: rgba(255, 255, 255, 0.95);
+  font-weight: 600;
+  letter-spacing: -0.01em;
 }
 
 .obj-marker {
   position: absolute;
-  border: 1px solid #000;
+  border: none;
   background: #ccc;
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: 9px;
-  font-family: "Helvetica", monospace;
+  font-size: 10px;
+  font-weight: 600;
+  font-family: -apple-system, BlinkMacSystemFont, "SF Pro Text", sans-serif;
+  color: #fff;
   pointer-events: none;
+  border-radius: 5px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
+  letter-spacing: -0.02em;
 }
 
 .center-mark {
@@ -118,37 +155,151 @@ th {
   left: 299px;
   width: 2px;
   height: 26px;
-  background: red;
-}
-
-#status {
-  margin: 4px 0;
+  background: #ff3b30;
+  border-radius: 1px;
 }
 
 #pausedLabel {
   display: none;
   position: absolute;
-  top: 6px;
-  right: 8px;
+  top: 14px;
+  right: 14px;
   font-size: 12px;
-  font-weight: bold;
-  color: red;
+  font-weight: 600;
+  color: #ff3b30;
+  background: rgba(255, 255, 255, 0.8);
+  padding: 5px 12px;
+  border-radius: 100px;
+  backdrop-filter: saturate(180%) blur(20px);
+  -webkit-backdrop-filter: saturate(180%) blur(20px);
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.08);
+  letter-spacing: -0.01em;
+  z-index: 10;
+}
+
+table {
+  border-collapse: separate;
+  border-spacing: 0;
+  margin-bottom: 14px;
+  background: #ffffff;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+}
+
+td,
+th {
+  border: none;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.06);
+  border-right: 1px solid rgba(0, 0, 0, 0.06);
+  padding: 9px 14px;
+  text-align: center;
+  font-size: 12px;
+  font-weight: 500;
+  font-family: -apple-system, BlinkMacSystemFont, "SF Pro Text", sans-serif;
+  letter-spacing: -0.01em;
+  color: #1d1d1f;
+}
+
+td:last-child,
+th:last-child {
+  border-right: none;
+}
+
+tr:last-child td {
+  border-bottom: none;
+}
+
+th {
+  background: #fafafa;
+  color: #6e6e73;
+  font-weight: 600;
+  font-size: 10.5px;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+#zoneTable th[colspan] {
+  background: #1d1d1f;
+  color: #f5f5f7;
+  font-size: 12px;
+  padding: 10px;
+  text-transform: none;
+  letter-spacing: -0.01em;
+  font-weight: 600;
 }
 
 button {
-  font-family: "Helvetica", monospace;
-  font-size: 12px;
-  padding: 2px 8px;
+  font-family: -apple-system, BlinkMacSystemFont, "SF Pro Text", sans-serif;
+  font-size: 13px;
+  font-weight: 500;
+  padding: 7px 16px;
   cursor: pointer;
-  margin: 1px;
-  background: #eee;
-  border: 1px solid #000;
+  margin: 3px;
+  background: #ffffff;
+  color: #1d1d1f;
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  border-radius: 100px;
+  transition: all 0.15s ease;
+  letter-spacing: -0.01em;
 }
 
 button:hover {
-  background: #ddd;
+  background: #f5f5f7;
+  border-color: rgba(0, 0, 0, 0.18);
+  transform: translateY(-1px);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+}
+
+button:active {
+  transform: translateY(0);
+  box-shadow: none;
+  background: #ececee;
+}
+
+button b {
+  font-weight: 500;
+}
+
+#pauseBtn {
+  background: #0071e3;
+  color: #fff;
+  border-color: #0071e3;
+}
+
+#pauseBtn:hover {
+  background: #0077ed;
+  border-color: #0077ed;
+  box-shadow: 0 2px 10px rgba(0, 113, 227, 0.25);
+}
+
+#pauseBtn:active {
+  background: #006bd6;
+}
+
+#weightButtons button {
+  min-width: 34px;
+  padding: 6px 0;
+  margin: 2px;
 }
 
 .weight-panel {
-  margin: 6px 0;
+  margin: 14px 0 18px;
+  padding: 14px 20px;
+  background: #ffffff;
+  border-radius: 14px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+  font-size: 13px;
+  color: #1d1d1f;
+  font-weight: 500;
+  letter-spacing: -0.01em;
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.weight-panel b {
+  font-weight: 600;
+  color: #0071e3;
 }

@@ -11,15 +11,16 @@ Undo the last placed weight
 Reset the whole thing
 Refresh the page and pick up right where you left off
 
-The plank has a fixed length, and the pivot sits exactly in the middle. When you click a zone you pick a weight, and it drops onto the plank. Heavier weights show up in a more intense red. The color shifts with the weight using this small piece of logic:
-
-![Color by weight](image.png)
-
-The seesaw tilts linearly based on the torque difference, capped at 30 degrees. So twice the torque difference means twice the tilt angle. 
+The seesaw tilts linearly based on the torque difference, capped at 30 degrees. So twice the torque difference means twice the tilt angle.
 ![first](image-16.png)
 ![second](image-17.png)
 ![third](image-18.png)
 ![fourth](image-19.png)
+
+The plank has a fixed length, and the pivot sits exactly in the middle. When you click a zone you pick a weight, and it drops onto the plank. Heavier weights show up in a more intense red. The color shifts with the weight using this small piece of logic:
+
+![Color by weight](image.png)
+
 The current state is saved in localStorage, which is why reloading the page doesn't wipe your setup.
 
 ## Sound effects
@@ -60,6 +61,7 @@ If we rearrange it, theta becomes `90 - currentAngle`. So instead of using `sin(
 ![sin(90 - currentAngle) form](Ekran%20görüntüsü%202026-04-15%20190903.png)
 
 …we can just use `cos(currentAngle)`, which gives the same result:
+
 ![formula](image-15.png)
 
 ![cos(currentAngle) form](image-4.png)
@@ -84,6 +86,7 @@ And if you place an equally heavy weight on the opposite side, the torques cance
 The alternative code is already in the JS file as comments. If you want to try it, just swap the "original code" blocks for the "alternative code" ones.
 
 ---
+
 
 Thanks for taking the time to look through this. Feel free to reach out if you have any questions.
 
