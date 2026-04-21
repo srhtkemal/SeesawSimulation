@@ -307,6 +307,28 @@ function playCreak() {
     statusEl.textContent =
       'Last object is removed. Remaining: ' + objects.length;
   };
+  window.addRandomLeft = function () {
+    const zone = -(Math.floor(Math.random() * ZONES) + 1);
+    const weight = Math.floor(Math.random() * 10) + 1;
+    objects.push({ zone: zone, weight: weight });
+    addMarker(zone, weight, objects.length - 1);
+    playDrop();
+    recalculate();
+    saveState();
+    statusEl.textContent = weight + ' kg placed at zone ' + zone + ' (random). Total: ' + objects.length;
+  };
+
+  window.addRandomRight = function () {
+    const zone = Math.floor(Math.random() * ZONES) + 1;
+    const weight = Math.floor(Math.random() * 10) + 1;
+    objects.push({ zone: zone, weight: weight });
+    addMarker(zone, weight, objects.length - 1);
+    playDrop();
+    recalculate();
+    saveState();
+    statusEl.textContent = weight + ' kg placed at zone ' + zone + ' (random). Total: ' + objects.length;
+  };
+
   window.togglePause = function () {
     playClick();
     paused = !paused;

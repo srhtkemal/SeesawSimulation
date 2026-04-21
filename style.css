@@ -283,6 +283,14 @@ button b {
   margin: 2px;
 }
 
+.random-btns-row {
+  display: flex;
+  justify-content: space-between;
+  width: 640px;
+  margin: 0 0 6px;
+}
+
+
 .weight-panel {
   margin: 14px 0 18px;
   padding: 14px 20px;
